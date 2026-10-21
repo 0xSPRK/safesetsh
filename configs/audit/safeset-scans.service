@@ -1,0 +1,9 @@
+[Unit]
+Description=safeset weekly integrity/rootkit/audit scans
+Documentation=https://github.com/0xSPRK/safesetsh
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/safeset-scans.sh
+Nice=10
+IOSchedulingClass=idle

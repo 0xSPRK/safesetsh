@@ -1,0 +1,33 @@
+# Managed by safeset (safesetsh).
+# Fail2ban defaults + sshd and recidive jails.
+
+[DEFAULT]
+# nftables backend (nft set based bans; needs nftables + iptables-nft).
+banaction = nftables-multiport
+banaction_allports = nftables-allports
+bantime = 1h
+findtime = 10m
+maxretry = 5
+# Never ban localhost or the operator.
+ignoreip = 127.0.0.1/8 ::1 @IGNORE_IP@
+# Escalating bans for repeat offenders.
+bantime.increment = true
+bantime.factor = 2
+bantime.maxtime = 4w
+
+[sshd]
+enabled = true
+port = @SSH_PORT@
+mode = aggressive
+maxretry = 3
+findtime = 10m
+bantime = 1h
+
+# Long bans for hosts banned repeatedly across all jails.
+[recidive]
+enabled = true
+logpath = /var/log/fail2ban.log
+banaction = nftables-allports
+findtime = 1d
+maxretry = 3
+bantime = 4w

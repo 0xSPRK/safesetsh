@@ -1,0 +1,13 @@
+# tooling / local metadata
+.repowise/
+.bats/
+*.log
+
+# editor
+.vscode/
+.idea/
+*.swp
+
+# test artifacts
+tests/tmp/
+/var/
